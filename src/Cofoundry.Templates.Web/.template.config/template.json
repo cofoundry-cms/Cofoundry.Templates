@@ -1,0 +1,14 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "Cofoundry.org",
+    "classifications": [ "Web", "MVC", "CMS" ],
+	"defaultName": "CofoundryApplication1",
+    "identity": "Cofoundry.Templates.Web",
+    "name": "Cofoundry Web",
+    "shortName": "cofoundry-web",
+	"tags": {
+		"language": "C#",
+		"type": "project"
+	},
+	"sourceName": "Cofoundry.Templates.Web"
+}
