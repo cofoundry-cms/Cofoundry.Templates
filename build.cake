@@ -12,7 +12,7 @@ bool isPrerelease = false;
 GitVersion versionInfo = null;
 string artifactDirectory = "./artifacts";
 
-var projectsToBuild = new string[]{
+var projectsToBuild = new string[] {
     "Cofoundry.Templates.Web",
 };
 
@@ -32,8 +32,6 @@ Task("Clean")
     .Does(() =>
 {
     CleanDirectory(artifactDirectory);
-    CleanDirectories("./src/**/bin/");
-    CleanDirectories("./src/**/obj/");
 });
 
 
@@ -58,35 +56,49 @@ Task("Copy")
     {
         var sourceDirectory = "./src/" + projectToBuild + "/";
         var packageDirectory = artifactDirectory + "/" + projectToBuild;
-        Information("Copying {0} to {1}", sourceDirectory, packageDirectory);
-        CopyDirectory(sourceDirectory, packageDirectory);
+        var packageContentDirectory = packageDirectory + "/content";
+        var directorySettings = new DeleteDirectorySettings() {
+            Recursive = true,
+            Force = true
+        };
+        CopyDirectory(sourceDirectory, packageContentDirectory);
+
+        DeleteDirectory(packageContentDirectory + "/bin", directorySettings);
+        DeleteDirectory(packageContentDirectory + "/obj", directorySettings);
+        DeleteDirectory(packageContentDirectory + "/App_Data", directorySettings);
+
+        var nuspecFile = "/" + projectToBuild + ".nuspec";
+        MoveFile(packageContentDirectory + nuspecFile, packageDirectory + nuspecFile);
     }
 });
 
-// Task("Build")
-//     .IsDependentOn("Restore-NuGet-Packages")
-//     .Does(() =>
-// {
+Task("Pack")
+    .IsDependentOn("Copy")
+    .Does(() =>
+{
     
-//     var settings = new DotNetCoreBuildSettings
-//         {
-//             Configuration = configuration,
-//             ArgumentCustomization = args => args
-//                 .Append("/p:NuGetVersion=" + versionInfo.NuGetVersion)
-//                 .Append("/p:AssemblyVersion=" + versionInfo.AssemblySemVer)
-//                 .Append("/p:FileVersion=" + versionInfo.MajorMinorPatch + ".0")
-//                 .Append("/p:InformationalVersion=" + versionInfo.InformationalVersion)
-//                 .Append("/p:Copyright=" + "\"Copyright © Cofoundry.org " + DateTime.Now.Year + "\"")
-//         };
+    var settings = new NuGetPackSettings
+        {
+            OutputDirectory = "./artifacts/",
+            Version = versionInfo.NuGetVersion
+            // ArgumentCustomization = args => args
+            //     .Append("/p:NuGetVersion=" + versionInfo.NuGetVersion)
+            //     .Append("/p:AssemblyVersion=" + versionInfo.AssemblySemVer)
+            //     .Append("/p:FileVersion=" + versionInfo.MajorMinorPatch + ".0")
+            //     .Append("/p:InformationalVersion=" + versionInfo.InformationalVersion)
+            //     .Append("/p:Copyright=" + "\"Copyright © Cofoundry.org " + DateTime.Now.Year + "\"")
+        };
     
-//     foreach (var projectToBuild in projectsToBuild)
-//     {
-//         DotNetCoreBuild(projectToBuild, settings);
-//     }
-// });
+    foreach (var projectToBuild in projectsToBuild)
+    {
+        var packageDirectory = artifactDirectory + "/" + projectToBuild;
+        var nuspecFile = packageDirectory + "/" + projectToBuild + ".nuspec";
+        NuGetPack(nuspecFile, settings);
+    }
+});
 
 // Task("Pack")
-//     .IsDependentOn("Build")
+//     .IsDependentOn("Copy")
 //     .Does(() =>
 // {
 //     var settings = new DotNetCorePackSettings
@@ -133,7 +145,7 @@ Task("Copy")
 // TASK TARGETS
 //////////////////////////////////////////////////////////////////////
 
-Task("Default").IsDependentOn("Copy");
+Task("Default").IsDependentOn("Pack");
 
 //////////////////////////////////////////////////////////////////////
 // EXECUTION

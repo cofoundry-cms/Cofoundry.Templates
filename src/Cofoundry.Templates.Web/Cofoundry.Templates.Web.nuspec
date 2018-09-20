@@ -4,14 +4,15 @@
     <id>Cofoundry.Templates.Web</id>
     <version>1.0.0</version>
     <description>
-      Creates a basic Cofoundry website project.
+      Template for a basic Cofoundry website project.
     </description>
     <authors>Cofoundry</authors>
-    <PackageIconUrl>https://www.cofoundry.org/Content/images/external/logo-nuget-64x64.png</PackageIconUrl>
-    <PackageLicenseUrl>https://github.com/cofoundry-cms/cofoundry/blob/master/LICENSE</PackageLicenseUrl>
-    <PackageProjectUrl>https://www.cofoundry.org</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/cofoundry-cms/cofoundry/Cofoundry.Templates/</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
+    <iconUrl>https://www.cofoundry.org/Content/images/external/logo-nuget-64x64.png</iconUrl>
+    <licenseUrl>https://github.com/cofoundry-cms/cofoundry/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://www.cofoundry.org</projectUrl>
+    <repository type="git" url="https://github.com/cofoundry-cms/cofoundry/Cofoundry.Templates/"/>
+    <copyright>Copyright © Cofoundry.org</copyright>
+    <tags>Cofoundry Templates</tags>
     <packageTypes>
       <packageType name="Template" />
     </packageTypes>

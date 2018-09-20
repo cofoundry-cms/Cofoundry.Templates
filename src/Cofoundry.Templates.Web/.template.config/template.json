@@ -10,5 +10,6 @@
 		"language": "C#",
 		"type": "project"
 	},
-	"sourceName": "Cofoundry.Templates.Web"
+	"sourceName": "Cofoundry.Templates.Web",
+	"preferNameDirectory": "true"
 }
