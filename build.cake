@@ -49,20 +49,29 @@ Task("Copy")
         var sourceDirectory = "./src/" + projectToBuild + "/";
         var packageDirectory = artifactDirectory + "/" + projectToBuild;
         var packageContentDirectory = packageDirectory + "/content";
-        var directorySettings = new DeleteDirectorySettings() {
-            Recursive = true,
-            Force = true
-        };
+        
         CopyDirectory(sourceDirectory, packageContentDirectory);
 
-        DeleteDirectory(packageContentDirectory + "/bin", directorySettings);
-        DeleteDirectory(packageContentDirectory + "/obj", directorySettings);
-        DeleteDirectory(packageContentDirectory + "/App_Data", directorySettings);
+        DeletedirectoryIfNotExists(packageContentDirectory + "/bin");
+        DeletedirectoryIfNotExists(packageContentDirectory + "/obj");
+        DeletedirectoryIfNotExists(packageContentDirectory + "/App_Data");
 
         var nuspecFile = "/" + projectToBuild + ".nuspec";
         MoveFile(packageContentDirectory + nuspecFile, packageDirectory + nuspecFile);
     }
 });
+
+private void DeletedirectoryIfNotExists(string directory)
+{
+    if (DirectoryExists(directory))
+    {
+        var directorySettings = new DeleteDirectorySettings() {
+            Recursive = true,
+            Force = true
+        };
+        DeleteDirectory(directory, directorySettings);
+    }
+}
 
 Task("Pack")
     .IsDependentOn("Copy")
