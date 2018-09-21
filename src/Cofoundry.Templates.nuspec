@@ -10,7 +10,7 @@
     <iconUrl>https://www.cofoundry.org/Content/images/external/logo-nuget-64x64.png</iconUrl>
     <licenseUrl>https://github.com/cofoundry-cms/cofoundry/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://www.cofoundry.org</projectUrl>
-    <repository type="git" url="https://github.com/cofoundry-cms/cofoundry/Cofoundry.Templates/"/>
+    <repository type="git" url="https://github.com/cofoundry-cms/Cofoundry.Templates/"/>
     <copyright>Copyright © Cofoundry.org</copyright>
     <tags>Cofoundry Templates</tags>
     <packageTypes>
