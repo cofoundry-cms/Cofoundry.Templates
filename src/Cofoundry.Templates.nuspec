@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
-    <id>Cofoundry.Templates.Web</id>
+    <id>Cofoundry.Templates</id>
     <version>1.0.0</version>
     <description>
-      A basic Cofoundry project template that includes startup code and examples of page templates, block types, custom entities and error pages.
+      Project starter templates for Cofoundry CMS.
     </description>
     <authors>Cofoundry</authors>
     <iconUrl>https://www.cofoundry.org/Content/images/external/logo-nuget-64x64.png</iconUrl>
@@ -17,4 +17,8 @@
       <packageType name="Template" />
     </packageTypes>
   </metadata>
+  
+  <files>
+	<file src="..\src\Cofoundry.Templates.Web\**\*.*" exclude="**\bin\**\*;**\obj\**\*;**/*.user;**\App_Data\**\*" target="content\Cofoundry.Templates.Web" />
+</files>
 </package>

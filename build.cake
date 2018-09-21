@@ -10,11 +10,8 @@ var target = Argument("target", "Default");
 var pushPackages = Argument("PushPackages", "false") == "true";
 bool isPrerelease = false;
 GitVersion versionInfo = null;
-string artifactDirectory = "./artifacts";
-
-var projectsToBuild = new string[] {
-    "Cofoundry.Templates.Web",
-};
+var artifactDirectory = "./artifacts";
+var nuspecFile = "/Cofoundry.Templates.nuspec";
 
 //////////////////////////////////////////////////////////////////////
 // TASKS
@@ -44,34 +41,8 @@ Task("Copy")
     .IsDependentOn("Get-Version")
     .Does(() =>
 {
-    foreach (var projectToBuild in projectsToBuild)
-    {
-        var sourceDirectory = "./src/" + projectToBuild + "/";
-        var packageDirectory = artifactDirectory + "/" + projectToBuild;
-        var packageContentDirectory = packageDirectory + "/content";
-        
-        CopyDirectory(sourceDirectory, packageContentDirectory);
-
-        DeletedirectoryIfNotExists(packageContentDirectory + "/bin");
-        DeletedirectoryIfNotExists(packageContentDirectory + "/obj");
-        DeletedirectoryIfNotExists(packageContentDirectory + "/App_Data");
-
-        var nuspecFile = "/" + projectToBuild + ".nuspec";
-        MoveFile(packageContentDirectory + nuspecFile, packageDirectory + nuspecFile);
-    }
+    CopyFile("./src" + nuspecFile, artifactDirectory + nuspecFile);
 });
-
-private void DeletedirectoryIfNotExists(string directory)
-{
-    if (DirectoryExists(directory))
-    {
-        var directorySettings = new DeleteDirectorySettings() {
-            Recursive = true,
-            Force = true
-        };
-        DeleteDirectory(directory, directorySettings);
-    }
-}
 
 Task("Pack")
     .IsDependentOn("Copy")
@@ -84,12 +55,7 @@ Task("Pack")
             Version = versionInfo.NuGetVersion
         };
     
-    foreach (var projectToBuild in projectsToBuild)
-    {
-        var packageDirectory = artifactDirectory + "/" + projectToBuild;
-        var nuspecFile = packageDirectory + "/" + projectToBuild + ".nuspec";
-        NuGetPack(nuspecFile, settings);
-    }
+    NuGetPack(artifactDirectory + nuspecFile, settings);
 });
 
 Task("PushNuGetPackage")
