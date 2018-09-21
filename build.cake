@@ -16,14 +16,6 @@ var projectsToBuild = new string[] {
     "Cofoundry.Templates.Web",
 };
 
-
-//////////////////////////////////////////////////////////////////////
-// PREPARATION
-//////////////////////////////////////////////////////////////////////
-
-//GitVersion versionInfo = null;
-var nugetPackageDir = Directory("./artifacts");
-
 //////////////////////////////////////////////////////////////////////
 // TASKS
 //////////////////////////////////////////////////////////////////////
@@ -81,12 +73,6 @@ Task("Pack")
         {
             OutputDirectory = "./artifacts/",
             Version = versionInfo.NuGetVersion
-            // ArgumentCustomization = args => args
-            //     .Append("/p:NuGetVersion=" + versionInfo.NuGetVersion)
-            //     .Append("/p:AssemblyVersion=" + versionInfo.AssemblySemVer)
-            //     .Append("/p:FileVersion=" + versionInfo.MajorMinorPatch + ".0")
-            //     .Append("/p:InformationalVersion=" + versionInfo.InformationalVersion)
-            //     .Append("/p:Copyright=" + "\"Copyright © Cofoundry.org " + DateTime.Now.Year + "\"")
         };
     
     foreach (var projectToBuild in projectsToBuild)
@@ -97,49 +83,32 @@ Task("Pack")
     }
 });
 
-// Task("Pack")
-//     .IsDependentOn("Copy")
-//     .Does(() =>
-// {
-//     var settings = new DotNetCorePackSettings
-//         {
-//             Configuration = configuration,
-//             OutputDirectory = "./artifacts/",
-//             NoBuild = true
-//         };
+Task("PushNuGetPackage")
+    .IsDependentOn("Pack")
+    .Does(() =>
+{
+    var nugets = GetFiles(artifactDirectory + "/*.nupkg");
     
-//     foreach (var projectToBuild in projectsToBuild)
-//     {
-//         DotNetCorePack(projectToBuild, settings);
-//     }
-// });
-
-// Task("PushNuGetPackage")
-//     .IsDependentOn("Pack")
-//     .Does(() =>
-// {
-//     var nugets = GetFiles("./artifacts/*.nupkg");
-    
-//     if (pushPackages)
-//     {
-//         Information("Pushing packages");
+    if (pushPackages)
+    {
+        Information("Pushing packages");
         
-//         if (isPrerelease)
-//         {
-//             NuGetPush(nugets, new NuGetPushSettings {
-//                 Source = "https://www.myget.org/F/cofoundry/api/v2/package",
-//                 ApiKey = EnvironmentVariable("MYGET_API_KEY")
-//             });
-//         }
-//         else
-//         {
-//             NuGetPush(nugets, new NuGetPushSettings {
-//                 Source = "https://nuget.org/",
-//                 ApiKey = EnvironmentVariable("NUGET_API_KEY")
-//             });
-//         }
-//     }
-// });
+        if (isPrerelease)
+        {
+            NuGetPush(nugets, new NuGetPushSettings {
+                Source = "https://www.myget.org/F/cofoundry/api/v2/package",
+                ApiKey = EnvironmentVariable("MYGET_API_KEY")
+            });
+        }
+        else
+        {
+            NuGetPush(nugets, new NuGetPushSettings {
+                Source = "https://nuget.org/",
+                ApiKey = EnvironmentVariable("NUGET_API_KEY")
+            });
+        }
+    }
+});
 
 //////////////////////////////////////////////////////////////////////
 // TASK TARGETS

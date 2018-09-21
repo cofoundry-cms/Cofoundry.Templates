@@ -1,6 +1,6 @@
 {
     "$schema": "http://json.schemastore.org/template",
-    "author": "Cofoundry.org",
+    "author": "Cofoundry",
     "classifications": [ "Web", "MVC", "CMS" ],
 	"defaultName": "CofoundryApplication1",
     "identity": "Cofoundry.Templates.Web",
@@ -11,5 +11,22 @@
 		"type": "project"
 	},
 	"sourceName": "Cofoundry.Templates.Web",
-	"preferNameDirectory": "true"
+	"preferNameDirectory": "true",
+	"symbols": {
+		"HttpPortGenerated": {
+		  "type": "generated",
+		  "generator": "port",
+		  "replaces": "8080"
+		},
+	
+		"HttpsPortGenerated": {
+		  "type": "generated",
+		  "generator": "port",
+		  "parameters": {
+			"low": 44300,
+			"high": 44399
+		  },
+		  "replaces": "44300"
+		},
+	}
 }

@@ -4,7 +4,7 @@
     <id>Cofoundry.Templates.Web</id>
     <version>1.0.0</version>
     <description>
-      Template for a basic Cofoundry website project.
+      A basic Cofoundry project template that includes startup code and examples of page templates, block types, custom entities and error pages.
     </description>
     <authors>Cofoundry</authors>
     <iconUrl>https://www.cofoundry.org/Content/images/external/logo-nuget-64x64.png</iconUrl>
