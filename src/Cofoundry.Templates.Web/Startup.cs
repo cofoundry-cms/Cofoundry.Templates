@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace Cofoundry.Templates.Web
 {
@@ -22,11 +23,11 @@ namespace Cofoundry.Templates.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddMvc()
+                .AddControllersWithViews()
                 .AddCofoundry(Configuration);
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (!env.IsDevelopment())
             {
