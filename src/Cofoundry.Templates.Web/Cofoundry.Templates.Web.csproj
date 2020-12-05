@@ -7,10 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Cofoundry.Plugins.Imaging.SkiaSharp" Version="0.1.0" />
-    <PackageReference Include="Cofoundry.Plugins.ErrorLogging.Admin" Version="0.7.0" />
-    <PackageReference Include="Cofoundry.Plugins.SiteMap" Version="0.7.0" />
-    <PackageReference Include="Cofoundry.Web.Admin" Version="0.7.0" />
+    <PackageReference Include="Cofoundry.Plugins.Imaging.SkiaSharp" Version="0.2.0" />
+    <PackageReference Include="Cofoundry.Plugins.ErrorLogging.Admin" Version="0.8.0" />
+    <PackageReference Include="Cofoundry.Plugins.SiteMap" Version="0.8.0" />
+    <PackageReference Include="Cofoundry.Web.Admin" Version="0.8.0" />
   </ItemGroup>
 
 </Project>
