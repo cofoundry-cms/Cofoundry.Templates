@@ -8,7 +8,7 @@ namespace Cofoundry.Templates.Web
 {
     /// <summary>
     /// An example page block type. 
-    /// See https://github.com/cofoundry-cms/cofoundry/wiki/Page-Block-Types
+    /// See https://www.cofoundry.org/docs/content-management/page-block-types
     /// for more information
     /// </summary>
     public class ContentSectionDataModel : IPageBlockTypeDataModel, IPageBlockTypeDisplayModel

@@ -1,13 +1,10 @@
 ﻿using Cofoundry.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Cofoundry.Templates.Web
 {
     /// <summary>
     /// An example custom entity definition. 
-    /// See https://github.com/cofoundry-cms/cofoundry/wiki/Custom-Entities
+    /// See https://www.cofoundry.org/docs/content-management/custom-entities
     /// for more information
     /// </summary>
     public class ProductCustomEntityDefinition : ICustomEntityDefinition<ProductDataModel>
