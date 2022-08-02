@@ -1,22 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
+﻿var builder = WebApplication.CreateBuilder(args);
+builder.WebHost.UseLocalConfigFile();
 
-namespace Cofoundry.Templates.Web
+builder.Services
+    .AddControllersWithViews()
+    .AddCofoundry(builder.Configuration);
+
+var app = builder.Build();
+
+if (!builder.Environment.IsDevelopment())
 {
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            CreateWebHostBuilder(args).Build().Run();
-        }
-
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
-    }
+    app.UseHsts();
 }
+
+app.UseHttpsRedirection();
+app.UseCofoundry();
+
+app.Run();
