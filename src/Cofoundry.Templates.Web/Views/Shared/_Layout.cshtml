@@ -1,10 +1,9 @@
 ﻿@inject ICofoundryHelper Cofoundry
-
 @{
     Layout = null;
 
-    string title = null;
-    string description = null;
+    string? title = null;
+    string? description = null;
 
     var metaDataModel = Model as IPageWithMetaDataViewModel;
     if (metaDataModel != null)
@@ -20,7 +19,6 @@
     title = StringHelper.FirstNonEmpty(title, ViewBag.Title, "TODO: Add default title");
     title += " | Cofoundry Template Site";
 }
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

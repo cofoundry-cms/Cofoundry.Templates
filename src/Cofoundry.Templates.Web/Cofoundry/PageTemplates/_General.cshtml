@@ -6,9 +6,8 @@
 <h1>@Model.PageTitle</h1>
 <div>
     @(await Cofoundry.Template.Region("Body")
-                .AllowMultipleBlocks()
-                .AllowBlockType<ContentSectionDataModel>()
-                .EmptyContentMinHeight(500)
-                .InvokeAsync())
-
+        .AllowMultipleBlocks()
+        .AllowBlockType<ContentSectionDataModel>()
+        .EmptyContentMinHeight(500)
+        .InvokeAsync())
 </div>

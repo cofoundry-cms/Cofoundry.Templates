@@ -2,7 +2,6 @@
 
 [![Build status](https://ci.appveyor.com/api/projects/status/9w9jviwicq2id0wt?svg=true)](https://ci.appveyor.com/project/Cofoundry/cofoundry-templates)
 [![NuGet](https://img.shields.io/nuget/v/Cofoundry.Templates.svg)](https://www.nuget.org/packages/Cofoundry.Templates/)
-[![Gitter](https://img.shields.io/gitter/room/cofoundry-cms/cofoundry.svg)](https://gitter.im/cofoundry-cms/cofoundry)
 
 
 This project contains the following project templates for [Cofoundry](https://www.cofoundry.org/).  For more information on getting started with Cofoundry check out the [Cofoundry repository](https://github.com/cofoundry-cms/cofoundry).
